@@ -22,16 +22,12 @@ const PostSchema = new mongoose.Schema(
 		},
 		description: {
 			type: String,
-			required: true,
 		},
 		image: {
 			type: Object,
 			required: true,
 		},
-		likes: {
-			type: Number,
-			default: 0,
-		},
+		likes: [{ type: mongoose.Schema.ObjectId, ref: "User" }],
 		comments: {
 			type: [CommentSchema],
 			default: [],

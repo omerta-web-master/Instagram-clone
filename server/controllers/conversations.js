@@ -19,12 +19,12 @@ exports.getConversationsOfLoggedInUser = asyncHandler(async (req, res, nex) => {
 // @route   POST /api/conversations
 // @access  Private
 exports.createConversation = asyncHandler(async (req, res, next) => {
-	const senderId = req.user._id;
+	const senderId = req.user._id.toString();
 	const receiverId = req.body.receiver;
 
 	// Check to see if a conversation already exists
 	const existentConversation = await Conversation.findOne({
-		members: [senderId, receiverId],
+		members: { $all: [senderId, receiverId] },
 	});
 	if (existentConversation) {
 		return res.status(200).json({ success: true, data: existentConversation });

@@ -40,6 +40,10 @@ app.use("/api/followhandler", followRouter);
 app.use("/api/conversations", conversationsRouter);
 app.use("/api/messages", messagesRouter);
 
+app.get("/", (req, res) => {
+	res.send("Api running");
+});
+
 // Socket io connection
 io.on("connection", onConnection(io));
 
